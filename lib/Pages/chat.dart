@@ -1,6 +1,9 @@
+import 'package:flew/Pages/chat_data.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatefulWidget {
+  const ChatPage({super.key});
+
   @override
   ChatPageState createState() => ChatPageState();
 }
@@ -8,6 +11,7 @@ class ChatPage extends StatefulWidget {
 class ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
+    List<String> chatMessages = ChatData().messages();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -22,31 +26,31 @@ class ChatPageState extends State<ChatPage> {
               const Text("Chat Page"),
               const Text("Chat Page"),
               Expanded(
-                child: ListView(
-                  children: <Widget>[
-                    ListTile(
-                      title: const Text('Message 1'),
-                      subtitle: const Text('Description 1'),
-                    ),
-                    ListTile(
-                      title: const Text('Message 2'),
-                      subtitle: const Text('Description 2'),
-                    ),
-                    ListTile(
-                      title: const Text('Message 3'),
-                      subtitle: const Text('Description 3'),
-                    ),
-                  ],
-                ),
+                child: ListView.builder(
+                    itemCount: chatMessages.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(
+                          chatMessages[index],
+                          textAlign:
+                              index % 2 == 0 ? TextAlign.left : TextAlign.right,
+                        ),
+                        subtitle: Text(
+                          'Description $index',
+                          textAlign:
+                              index % 2 == 0 ? TextAlign.left : TextAlign.right,
+                        ),
+                      );
+                    }),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       flex: 4,
                       child: TextField(
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Enter your message',
                         ),
