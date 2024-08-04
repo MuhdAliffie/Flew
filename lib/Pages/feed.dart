@@ -10,14 +10,6 @@ class FeedPage extends StatefulWidget {
 }
 
 class FeedPageState extends State<FeedPage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,21 +19,45 @@ class FeedPageState extends State<FeedPage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ChatPage()));
-              },
-              child: const Text('Chat'),
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ChatPage()));
+                  },
+                  child: const Text('Chat'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MarketPage()));
+                  },
+                  child: const Text('Market'),
+                ),
+              ],
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MarketPage()));
-              },
-              child: const Text('Market'),
+            SizedBox(
+              height: 300,
+              width: 400,
+              child: ListView(
+                children: <Widget>[
+                  ListTile(
+                    title: const Text('Item 1'),
+                    subtitle: const Text('Description 1'),
+                  ),
+                  ListTile(
+                    title: const Text('Item 2'),
+                    subtitle: const Text('Description 2'),
+                  ),
+                  ListTile(
+                    title: const Text('Item 3'),
+                    subtitle: const Text('Description 3'),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
